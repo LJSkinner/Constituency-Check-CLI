@@ -13,9 +13,9 @@ def main():
     elif re.match(POSTCODE_REGEX, sys.argv[1]) == None:
         print("You did not provide a valid UK Postcode. Example: FK20JA (do not include a space)\n%s" % USAGE)
     else:
-        scrape_seat_details(sys.argv[1])
+        process_seat_details(sys.argv[1])
 
-def scrape_seat_details(postcode: str):
+def process_seat_details(postcode: str):
     pass
         
 if __name__ == '__main__':
