@@ -17,9 +17,9 @@ def main():
     else:
         soup = get_soup(sys.argv[1])
         
-        process_seat_details(sys.argv[1])
+        process_seat_details(soup)
 
-def process_seat_details(postcode: str):
+def process_seat_details(site_soup: bs.BeautifulSoup):
     pass
 
 def get_soup(postcode: str) -> bs.BeautifulSoup:
