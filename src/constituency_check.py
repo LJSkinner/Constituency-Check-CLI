@@ -20,7 +20,23 @@ def main():
         process_seat_details(soup)
 
 def process_seat_details(site_soup: bs.BeautifulSoup):
-    pass
+    seat_pred_table = site_soup.find("table", attrs={"class":"seatpred"})
+    
+    seat_pred_headings = seat_pred_table.find_all("th")
+    
+    seat_pred_rows = seat_pred_table.find_all("tr")
+    
+    for heading in seat_pred_headings:
+        print(heading.text + " ", end="")
+        
+    print()
+    
+    for row in seat_pred_rows[1::]:
+        row_data = row.find_all('td')
+        
+        for data in row_data:
+            print(data.text + " ", end="")
+        print()
 
 def get_soup(postcode: str) -> bs.BeautifulSoup:
     source = request.urlopen(URL + postcode).read()
