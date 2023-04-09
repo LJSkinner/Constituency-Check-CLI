@@ -2,6 +2,7 @@ import bs4 as bs
 import urllib.request as request
 import sys
 import re
+import pandas as pd 
 
 USAGE = "Usage: python3 constiuency_check.py <postcode>"
 
@@ -28,10 +29,16 @@ def process_seat_details(site_soup: bs.BeautifulSoup):
     
     for heading in seat_pred_headings:
         print(heading.text + " ", end="")
+def transform_table_to_dataframe(headings, html_table_rows, begin=1, end=-1) -> pd.DataFrame:
+    res = []
+    for table_row in html_table_rows[begin:end]:
+        data = table_row.find_all('td')
         
-    print()
+        row = [tr.text.strip() for tr in data if tr.text.strip()]
+        
+        res.append(row)
     
-    for row in seat_pred_rows[1::]:
+    return pd.DataFrame(res, columns=[heading.text for heading in headings])
         row_data = row.find_all('td')
         
         for data in row_data:
