@@ -4,7 +4,7 @@ import sys
 import re
 import pandas as pd 
 
-USAGE = "Usage: python3 constiuency_check.py <postcode>"
+USAGE = "Usage: python3 constituency_check.py <postcode>"
 
 POSTCODE_REGEX = "^[A-Z]{1,2}[0-9][A-Z0-9]?[0-9][A-Z]{2}$"
 
