@@ -2,7 +2,9 @@
 
 Constituency Check is a command line utility written in Python that allows users to input a UK postcode and retrieve details about their constituencies corresponding MP's seat, the parties chances of winning, and other related information from the Electoral Calculus website. 
 
-The data used in this project is provided by the [Electoral Calculus website](https://www.electoralcalculus.co.uk/newseatlookup.html), using their seat explorer tool. I am very grateful to the Electoral Calculus team for providing this website and data.
+The data used in this project is provided by the [Electoral Calculus website](https://www.electoralcalculus.co.uk/newseatlookup.html), using their seat explorer tool. I am very grateful to the Electoral Calculus team for providing this website and data. 
+
+Note: They do have an upper limit for the number of calls you can make to their service per day, so you may encounter an error if you're making a lot of calls in a day. 
 
 ## Legal
 
