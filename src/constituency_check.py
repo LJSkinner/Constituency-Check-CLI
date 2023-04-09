@@ -32,9 +32,18 @@ def process_seat_details(site_soup: bs.BeautifulSoup):
     seat_pred_rows = seat_pred_table.find_all("tr")
     
     seat_pred_dataframe = transform_table_to_dataframe(seat_pred_headings, seat_pred_rows)
-        print(heading.text + " ", end="")
+    
+    print("Welcome to Constituency Checker. Please see below for your seat details\n")
+    
+    print(site_soup.find("h1", attrs={"id":"title"}).text + "\n")
+    
+    print(seat_pred_dataframe.to_string(index=False) + "\n")
+    
+    print(site_soup.find("div", attrs={"class":"pills uppercase"}).text)
+    
 def transform_table_to_dataframe(headings, html_table_rows, begin=1, end=-1) -> pd.DataFrame:
     res = []
+    
     for table_row in html_table_rows[begin:end]:
         data = table_row.find_all('td')
         
@@ -43,11 +52,7 @@ def transform_table_to_dataframe(headings, html_table_rows, begin=1, end=-1) -> 
         res.append(row)
     
     return pd.DataFrame(res, columns=[heading.text for heading in headings])
-        row_data = row.find_all('td')
-        
-        for data in row_data:
-            print(data.text + " ", end="")
-        print()
+    
 
 def get_soup(postcode: str) -> bs.BeautifulSoup:
     source = request.urlopen(URL + postcode).read()
