@@ -45,7 +45,7 @@ def transform_table_to_dataframe(headings, html_table_rows, begin=1, end=-1) -> 
     res = []
     
     for table_row in html_table_rows[begin:end]:
-        data = table_row.find_all('td')
+        data = table_row.find_all("td")
         
         row = [tr.text.strip() for tr in data if tr.text.strip()]
         
@@ -53,7 +53,6 @@ def transform_table_to_dataframe(headings, html_table_rows, begin=1, end=-1) -> 
     
     return pd.DataFrame(res, columns=[heading.text for heading in headings])
     
-
 def get_soup(postcode: str) -> bs.BeautifulSoup:
     source = request.urlopen(URL + postcode).read()
     
