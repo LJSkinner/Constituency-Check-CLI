@@ -24,13 +24,14 @@ def process_seat_details(site_soup: bs.BeautifulSoup):
     if site_soup == None:
         print("Electoral Calculus could not be reached, you have either exceeded the number of calls for today or the service is down. Try again later")
         return
+    
     seat_pred_table = site_soup.find("table", attrs={"class":"seatpred"})
     
     seat_pred_headings = seat_pred_table.find_all("th")
     
     seat_pred_rows = seat_pred_table.find_all("tr")
     
-    for heading in seat_pred_headings:
+    seat_pred_dataframe = transform_table_to_dataframe(seat_pred_headings, seat_pred_rows)
         print(heading.text + " ", end="")
 def transform_table_to_dataframe(headings, html_table_rows, begin=1, end=-1) -> pd.DataFrame:
     res = []
