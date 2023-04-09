@@ -21,6 +21,9 @@ def main():
         process_seat_details(soup)
 
 def process_seat_details(site_soup: bs.BeautifulSoup):
+    if site_soup == None:
+        print("Electoral Calculus could not be reached, you have either exceeded the number of calls for today or the service is down. Try again later")
+        return
     seat_pred_table = site_soup.find("table", attrs={"class":"seatpred"})
     
     seat_pred_headings = seat_pred_table.find_all("th")
