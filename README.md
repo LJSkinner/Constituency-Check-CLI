@@ -41,7 +41,7 @@ Prediction: SNP hold
 Otherwise you'll get the following output:
 ```
 You did not provide a valid UK Postcode. Example: FK20JA (do not include a space)
-Usage: python3 constituency_check.py <postcode
+Usage: python3 constituency_check.py <postcode>
 ```
 
 ## Legal
@@ -50,7 +50,7 @@ This project is provided "as is", without warranty of any kind, express or impli
 
 In non legal speak, be sensible with this util. Please don't spam or overload their site with requests. I am not responsible for anything you do with this that is unethical. 
 
-If the authors over at Electoral Calculus have any concerns about the use or distribution of this software, please contact the project owner Luke Skinner at hyperconix@pm.me
+If the authors over at Electoral Calculus have any concerns about the use or distribution of this software, please contact the project owner Luke Skinner at hyperconix@pm.me.
 
 ## License
 
