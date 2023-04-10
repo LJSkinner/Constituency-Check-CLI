@@ -4,13 +4,13 @@ Constituency Check is a command line utility written in Python that allows users
 
 The data used in this project is provided by the [Electoral Calculus website](https://www.electoralcalculus.co.uk/newseatlookup.html), using their seat explorer tool. I am very grateful to the Electoral Calculus team for providing this website and data. 
 
-Note: They do have an upper limit for the number of calls you can make to their service per day, so you may encounter an error if you're making a lot of calls in a day. Additionally, due to the nature of web scraping, this could break at any point should their website change. 
+Note: They do have an upper limit for the number of calls you can make to their service per day, so you may encounter an error if you're making a lot of calls in a day. Additionally, due to the nature of web scraping, this could break at any point should their website change. I also may private this repo at any time at the request of the authors.
 
-## Usage
+## Usage & Installation
 First clone the repo and install the requirements using pip. This assumes you have Python and Pip installed on your machine. If not, please be sure to get both of them before continuing.
 ```bash
 git clone https://github.com/LJSkinner/Constituency-Check-CLI.git
-cd Constituency-Check-Cli/
+cd Constituency-Check-CLI/
 pip3 install -r requirements.txt
 ```
 
