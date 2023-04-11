@@ -33,13 +33,27 @@ def process_seat_details(site_soup: bs.BeautifulSoup):
     
     seat_pred_dataframe = transform_table_to_dataframe(seat_pred_headings, seat_pred_rows)
     
+    seat_summary_rows = site_soup.find("table", attrs={"class":"seatsummary"}).find_all("tr")
+    
+    seat_title = site_soup.find("h1", attrs={"id":"title"}).text
+    
+    party_winner_prediction = site_soup.find("div", attrs={"class":"pills uppercase"}).text
+    
     print("Welcome to Constituency Checker. Please see below for your seat details\n")
     
-    print(site_soup.find("h1", attrs={"id":"title"}).text + "\n")
+    print("%s\n" % seat_title)
     
-    print(seat_pred_dataframe.to_string(index=False) + "\n")
+    for seat_summary_row in seat_summary_rows:
+        seat_summary_data = seat_summary_row.find_all('td')
+        
+        for data in seat_summary_data:
+            print("%s " % data.text, end="")
+            
+        print()
     
-    print(site_soup.find("div", attrs={"class":"pills uppercase"}).text)
+    print("\n%s\n" % seat_pred_dataframe.to_string(index=False))
+    
+    print(party_winner_prediction)
     
 def transform_table_to_dataframe(headings, html_table_rows, begin=1, end=-1) -> pd.DataFrame:
     res = []
