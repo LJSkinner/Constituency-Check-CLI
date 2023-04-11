@@ -27,6 +27,11 @@ Welcome to Constituency Checker. Please see below for your seat details
 
 Linlithgow and East Falkirk: Seat Details
 
+MP at 2019: Martyn Day  (SNP) 
+County/Area: Edinburgh area (Scotland) 
+Electorate: 87,044 
+Turnout: 66.4% 
+
  Party 2019Votes 2019Share PredVotes
    SNP    25,551     44.2%     38.5%
    CON    14,285     24.7%     18.3%
