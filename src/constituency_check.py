@@ -3,6 +3,7 @@ import urllib.request as request
 import sys
 import re
 import pandas as pd 
+import os
 
 POSTCODE_USAGE = "Postcode Usage: python3 constituency_check.py <postcode>"
 
@@ -113,6 +114,8 @@ def handle_postcode_search(postcode: str):
     process_seat_details(soup)
 
 def process_seat_details(site_soup: bs.BeautifulSoup):
+    clear_console()
+    
     seat_pred_table = site_soup.find("table", attrs={"class":"seatpred"})
     
     if seat_pred_table == None:
@@ -174,6 +177,9 @@ def get_seat_list_soup() -> bs.BeautifulSoup:
     source = request.urlopen(SEAT_LIST_URL).read()
     
     return bs.BeautifulSoup(source, "lxml")
+
+def clear_console():
+    os.system("cls" if os.name == "nt" else "clear")
   
 if __name__ == "__main__":
     main()  
