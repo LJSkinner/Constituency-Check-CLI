@@ -45,7 +45,7 @@ def main():
         return
    
     if sys.argv[1] == "-n":
-        print("do name check stuff")
+        handle_name_search()
     else:
        handle_postcode_search()
        
@@ -106,6 +106,16 @@ def transform_table_to_dataframe(headings, html_table_rows, begin=1, end=-1) -> 
     
 def get_seat_soup_from_postcode(postcode: str) -> bs.BeautifulSoup:
     source = request.urlopen(POSTCODE_URL + postcode).read()
+    
+    return bs.BeautifulSoup(source, "lxml")
+
+def get_seat_soup_from_name(seat_name: str) -> bs.BeautifulSoup:
+    source = request.urlopen(SEAT_NAME_URL + seat_name).read()
+    
+    return bs.BeautifulSoup(source, "lxml")
+
+def get_seat_list_soup() -> bs.BeautifulSoup:
+    source = request.urlopen(SEAT_LIST_URL).read()
     
     return bs.BeautifulSoup(source, "lxml")
         
