@@ -77,6 +77,8 @@ def handle_name_search(seat_name: str):
           print(i + 1, ":", filtered_seat_list[i])
     
       if len(filtered_seat_list) == 0:
+          clear_console()
+          
           print("No results found, try again")
           
           seat_name = input("Enter the seat name (Type exit to quit): ")
@@ -86,15 +88,21 @@ def handle_name_search(seat_name: str):
       try:
           user_seat_choice = int(input("Please enter your choice using one of the numbers above (0 to go back): "))
       except ValueError:
+          clear_console()
+          
           print("Please make sure that you enter a number")
           
           continue
       
       if user_seat_choice < 0 or user_seat_choice > len(filtered_seat_list):
-          print("Please enter a number from one of the options above or 0 to go back.")
+          clear_console()
+          
+          print("Please make sure the number you entered is one of the seats or 0 to go back.")
           
           continue
       elif user_seat_choice == 0:
+          clear_console()
+          
           seat_name = input("Enter the seat name (Type exit to quit): ")
           
           continue
