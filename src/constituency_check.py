@@ -10,7 +10,14 @@ NAME_USAGE = "Seat Name Usage: python3 constituency_check.py -n <name> (If the s
 
 POSTCODE_REGEX = "^[A-Z]{1,2}[0-9][A-Z0-9]?[0-9][A-Z]{2}$"
 
+# The postcode URL is used when searching via postcode input
 POSTCODE_URL = "https://www.electoralcalculus.co.uk/fcgi-bin/seatdetails.py?postcode="
+
+# The seat name URL is used when searching via seat name input
+SEAT_NAME_URL = "https://www.electoralcalculus.co.uk/fcgi-bin/seatdetails.py?seat="
+
+# The seat list URL is used when searching via seat name input, this retrieves the list of all current seats
+SEAT_LIST_URL = "https://www.electoralcalculus.co.uk/orderedseats.html"
 
 DEFAULT_NUM_ARGS = 3
 
