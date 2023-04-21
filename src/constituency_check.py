@@ -135,8 +135,6 @@ def process_seat_details(site_soup: bs.BeautifulSoup):
     
     party_winner_prediction = site_soup.find("div", attrs={"class":"pills uppercase"}).text
     
-    print("Welcome to Constituency Checker. Please see below for your seat details\n")
-    
     print("%s\n" % seat_title)
     
     for seat_summary_row in seat_summary_rows:
