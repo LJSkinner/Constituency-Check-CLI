@@ -4,21 +4,51 @@ import sys
 import re
 import pandas as pd 
 
-USAGE = "Usage: python3 constituency_check.py <postcode>"
+POSTCODE_USAGE = "Postcode Usage: python3 constituency_check.py <postcode>"
+
+NAME_USAGE = "Seat Name Usage: python3 constituency_check.py -n <name> (If the seat contains spaces wrap it in quotes like \"this\")"
 
 POSTCODE_REGEX = "^[A-Z]{1,2}[0-9][A-Z0-9]?[0-9][A-Z]{2}$"
 
-URL = "https://www.electoralcalculus.co.uk/fcgi-bin/seatdetails.py?postcode="
+POSTCODE_URL = "https://www.electoralcalculus.co.uk/fcgi-bin/seatdetails.py?postcode="
+
+DEFAULT_NUM_ARGS = 3
 
 def main():
-    if len(sys.argv) < 2:
-        print("Postcode not provided. Please provide a postcode\n%s" % USAGE)
-    elif re.match(POSTCODE_REGEX, sys.argv[1]) == None:
-        print("You did not provide a valid UK Postcode. Example: FK20JA (do not include a space)\n%s" % USAGE)
-    else:
-        soup = get_soup(sys.argv[1])
+    if len(sys.argv) > DEFAULT_NUM_ARGS:
+        print("You entered incorrent inputs, please review the usages\n")
         
-        process_seat_details(soup)
+        print(POSTCODE_USAGE)
+        
+        print(NAME_USAGE)
+        
+        return
+    
+    if len(sys.argv) < 2:
+        print("Postcode not provided. Please provide a postcode\n%s" % POSTCODE_USAGE)
+        
+        return
+    elif re.match(POSTCODE_REGEX, sys.argv[1]) == None and sys.argv[1] != "-n":
+        print("You did not provide a valid UK Postcode. Example: FK20JA (do not include a space)\n%s" % POSTCODE_USAGE)
+        
+        return
+    elif sys.argv[1] == "-n" and len(sys.argv) < 3:
+        print("You did not provide a valid input for the seat name. Example: Falkirk\n%s" % NAME_USAGE)
+        
+        return
+   
+    if sys.argv[1] == "-n":
+        print("do name check stuff")
+    else:
+       handle_postcode_search()
+       
+def handle_name_search():
+    pass
+    
+def handle_postcode_search():
+    soup = get_seat_soup_from_postcode(sys.argv[1])
+    
+    process_seat_details(soup)
 
 def process_seat_details(site_soup: bs.BeautifulSoup):
     seat_pred_table = site_soup.find("table", attrs={"class":"seatpred"})
@@ -67,8 +97,8 @@ def transform_table_to_dataframe(headings, html_table_rows, begin=1, end=-1) -> 
     
     return pd.DataFrame(res, columns=[heading.text for heading in headings])
     
-def get_soup(postcode: str) -> bs.BeautifulSoup:
-    source = request.urlopen(URL + postcode).read()
+def get_seat_soup_from_postcode(postcode: str) -> bs.BeautifulSoup:
+    source = request.urlopen(POSTCODE_URL + postcode).read()
     
     return bs.BeautifulSoup(source, "lxml")
         
