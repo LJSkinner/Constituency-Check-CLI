@@ -45,15 +45,70 @@ def main():
         return
    
     if sys.argv[1] == "-n":
-        handle_name_search()
+        handle_name_search(sys.argv[2])
     else:
-       handle_postcode_search()
+        handle_postcode_search(sys.argv[1])
        
-def handle_name_search():
-    pass
+def handle_name_search(seat_name: str):
+    seat_list_soup = get_seat_list_soup()
     
-def handle_postcode_search():
-    soup = get_seat_soup_from_postcode(sys.argv[1])
+    seat_list_anchors = seat_list_soup.find("table", attrs={"class":"small ccllccrrrrrrrrcc"}).find_all("a")
+    
+    if seat_list_anchors == None:
+        print("The seat list could not be retrieved, please try again later")
+        
+        return
+    
+    seat_list = []
+    
+    for seat_list_anchor in seat_list_anchors:
+        seat_list.append(seat_list_anchor.text)
+          
+    while True:
+      if str.lower(seat_name) == "exit":
+          print("Thanks for using Constituency Checker, goodbye")
+          
+          break
+      
+      filtered_seat_list = [name for name in seat_list if seat_name in name]
+      
+      for i in range(len(filtered_seat_list)):
+          print(i + 1, ":", filtered_seat_list[i])
+    
+      if len(filtered_seat_list) == 0:
+          print("No results found, try again")
+          
+          seat_name = input("Enter the seat name (Type exit to quit): ")
+          
+          continue
+      
+      try:
+          user_seat_choice = int(input("Please enter your choice using one of the numbers above (0 to go back): "))
+      except ValueError:
+          print("Please make sure that you enter a number")
+          
+          continue
+      
+      if user_seat_choice < 0 or user_seat_choice > len(filtered_seat_list):
+          print("Please enter a number from one of the options above or 0 to go back.")
+          
+          continue
+      elif user_seat_choice == 0:
+          seat_name = input("Enter the seat name (Type exit to quit): ")
+          
+          continue
+      else:
+          # Add %20 to account for spaces in the url
+          selected_seat = str.replace(filtered_seat_list[user_seat_choice - 1], " ", "%20")
+          
+          soup = get_seat_soup_from_name(selected_seat)
+          
+          process_seat_details(soup)
+          
+      break
+          
+def handle_postcode_search(postcode: str):
+    soup = get_seat_soup_from_postcode(postcode)
     
     process_seat_details(soup)
 
@@ -62,6 +117,7 @@ def process_seat_details(site_soup: bs.BeautifulSoup):
     
     if seat_pred_table == None:
         print("Electoral Calculus could not be reached, you have either exceeded the number of calls for today or the service is down. Try again later")
+        
         return
     
     seat_pred_headings = seat_pred_table.find_all("th")
@@ -118,6 +174,6 @@ def get_seat_list_soup() -> bs.BeautifulSoup:
     source = request.urlopen(SEAT_LIST_URL).read()
     
     return bs.BeautifulSoup(source, "lxml")
-        
+  
 if __name__ == "__main__":
     main()  
