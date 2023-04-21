@@ -1,6 +1,6 @@
 # Constituency Check
 
-Constituency Check is a command line utility written in Python that allows users to input a UK postcode and retrieve details about their constituencies corresponding MP's seat, the parties chances of winning, and other related information from the Electoral Calculus website. 
+Constituency Check is a command line utility written in Python that allows users to input a UK postcode and retrieve details about their constituencies corresponding MP's seat, the parties chances of winning, and other related information from the Electoral Calculus website. You can also search for a seat by name and make use of  similar functionality provided as the EC seat explorer. 
 
 The data used in this project is provided by the [Electoral Calculus website](https://www.electoralcalculus.co.uk/newseatlookup.html), using their seat explorer tool. I am very grateful to the Electoral Calculus team for providing this website and data. 
 
@@ -14,6 +14,7 @@ cd Constituency-Check-CLI/
 pip3 install -r requirements.txt
 ```
 
+##### Seaching by Postcode
 Currently this checker supports searching by postcode. Once you've installed the requirements, you will want to run the **constituency_check.py** through python. This is located in the **src** folder but you can move this to anywhere you wish.
 
 An example of running this is as follows:
@@ -23,8 +24,6 @@ python3 constituency_check.py FK30JA
 
 If you provided a valid postcode, you should see something like this:
 ```
-Welcome to Constituency Checker. Please see below for your seat details
-
 Linlithgow and East Falkirk: Seat Details
 
 MP at 2019: Martyn Day  (SNP) 
@@ -46,9 +45,25 @@ Prediction: SNP hold
 Otherwise you'll get the following output:
 ```
 You did not provide a valid UK Postcode. Example: FK20JA (do not include a space)
-Usage: python3 constituency_check.py <postcode>
+Postcode Usage: python3 constituency_checker.py <postcode>
 ```
 
+##### Searching by Seat Name
+If you would like to search by seat name you'll want to use the **-n** switch and then provide the name. Note that the first time you run this as a command you'll be passing it as an argument, so make sure if it has spaces to wrap them in quotes like **"North East"**. After the menu displays, if you choose to search for another seat, you don't need to do this from then on.
+
+An example of running this is as follows:
+```bash
+python3 constituency_checker.py -n Falkirk
+```
+
+This will return a partial list of all the seats that contain the search term. So in this case we supplied **Falkirk** so we will get the two seats that contain **Falkirk** in them as shown below:
+```
+1 : Linlithgow and East Falkirk
+2 : Falkirk
+Please enter your choice using one of the numbers above (0 to go back):
+```
+
+From this point it works the same as the entering the postcode, we can go back with by entering 0 and then you'll be prompted to enter the seat name again. If you type exit then it will close or you can just terminate it from the shell.
 ## Legal
 
 This project is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
