@@ -51,8 +51,6 @@ def main():
         handle_postcode_search(sys.argv[1])
        
 def handle_name_search(seat_name: str):
-    seat_name = str.lower(seat_name)
-    
     seat_list_soup = get_seat_list_soup()
     
     seat_list_anchors = seat_list_soup.find("table", attrs={"class":"small ccllccrrrrrrrrcc"}).find_all("a")
@@ -73,7 +71,7 @@ def handle_name_search(seat_name: str):
           
           break
       
-      filtered_seat_list = [name for name in seat_list if seat_name in str.lower(name)]
+      filtered_seat_list = [name for name in seat_list if str.lower(seat_name) in str.lower(name)]
       
       for i in range(len(filtered_seat_list)):
           print(i + 1, ":", filtered_seat_list[i])
