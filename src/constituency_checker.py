@@ -75,8 +75,8 @@ def handle_name_search(seat_name: str):
       
       filtered_seat_list = [name for name in seat_list if seat_name in str.lower(name)]
       
-      for i in range(len(filtered_seat_list)):
-          print(i + 1, ":", filtered_seat_list[i])
+      for i, filtered_seat in enumerate(filtered_seat_list):
+          print(i + 1, ":", filtered_seat)
     
       if len(filtered_seat_list) == 0:
           clear_console()
@@ -109,14 +109,14 @@ def handle_name_search(seat_name: str):
           
           continue
       else:
-          # Add %20 to account for spaces in the url
+          # Add %20 to account for spaces in the seat name
           selected_seat = str.replace(filtered_seat_list[user_seat_choice - 1], " ", "%20")
           
           soup = get_seat_soup_from_name(selected_seat)
           
           process_seat_details(soup)
           
-      break
+      return
           
 def handle_postcode_search(postcode: str):
     soup = get_seat_soup_from_postcode(postcode)
