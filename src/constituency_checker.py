@@ -51,6 +51,8 @@ def main():
         handle_postcode_search(sys.argv[1])
        
 def handle_name_search(seat_name: str):
+    seat_name = seat_name.lower().strip()
+    
     seat_list_soup = get_seat_list_soup()
     
     seat_list_anchors = seat_list_soup.find("table", attrs={"class":"small ccllccrrrrrrrrcc"}).find_all("a")
@@ -66,12 +68,12 @@ def handle_name_search(seat_name: str):
         seat_list.append(seat_list_anchor.text)
           
     while True:
-      if str.lower(seat_name) == "exit":
+      if seat_name == "exit":
           print("Thanks for using Constituency Checker, goodbye")
           
           break
       
-      filtered_seat_list = [name for name in seat_list if str.lower(seat_name) in str.lower(name)]
+      filtered_seat_list = [name for name in seat_list if seat_name in str.lower(name)]
       
       for i in range(len(filtered_seat_list)):
           print(i + 1, ":", filtered_seat_list[i])
@@ -81,7 +83,7 @@ def handle_name_search(seat_name: str):
           
           print("No results found, try again")
           
-          seat_name = input("Enter the seat name (Type exit to quit): ")
+          seat_name = input("Enter the seat name (Type exit to quit): ").lower().strip()
           
           continue
       
@@ -103,7 +105,7 @@ def handle_name_search(seat_name: str):
       elif user_seat_choice == 0:
           clear_console()
           
-          seat_name = input("Enter the seat name (Type exit to quit): ")
+          seat_name = input("Enter the seat name (Type exit to quit): ").lower().strip()
           
           continue
       else:
