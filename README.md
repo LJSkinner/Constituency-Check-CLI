@@ -8,6 +8,9 @@ Note: They do have an upper limit for the number of calls you can make to their 
 
 ## Usage & Installation
 First clone the repo and install the requirements using pip. This assumes you have Python and Pip installed on your machine. If not, please be sure to get both of them before continuing.
+
+**pip3** may just be **pip** depending on your OS.
+
 ```bash
 git clone https://github.com/LJSkinner/Constituency-Check-CLI.git
 cd Constituency-Check-CLI/
@@ -17,7 +20,7 @@ pip3 install -r requirements.txt
 ##### Seaching by Postcode
 Currently this checker supports searching by postcode. Once you've installed the requirements, you will want to run the **constituency_check.py** through python. This is located in the **src** folder but you can move this to anywhere you wish.
 
-An example of running this is as follows:
+An example of running this is as follows (You may have to use "python" instead if you are on Windows):
 ```bash
 python3 constituency_check.py FK30JA
 ```
@@ -64,6 +67,9 @@ Please enter your choice using one of the numbers above (0 to go back):
 ```
 
 From this point it works the same as the entering the postcode, we can go back with by entering 0 and then you'll be prompted to enter the seat name again. If you type exit then it will close or you can just terminate it from the shell.
+
+I recommend that you alias this command in some way if you plan to use it a lot, regardless of what option you are doing. For most Linux & Mac users that will be adding an entry to their .bashrc file, and for Windows users I recommend creating a .bat or .ps1 file and adding it to your path. I personally alias to "seatcheck" as it is easy to remember. 
+
 ## Legal
 
 This project is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
