@@ -6,6 +6,12 @@ The data used in this project is provided by the [Electoral Calculus website](ht
 
 Note: They do have an upper limit for the number of calls you can make to their service per day, so you may encounter an error if you're making a lot of calls in a day. Additionally, due to the nature of web scraping, this could break at any point should their website change. I also may private this repo at any time at the request of the authors.
 
+## Update Todo
+Current plans for a v1.2 release of Constituency Checker:
+- [ ] Due to the upcoming election and boundary changes the current version of Constituency Checker reports old seat information. This needs to be amended so that is uses the new API.
+- [ ] Searching by MP name would be useful. Considerations need to be made about how to get these names, as MPs change more often than seat names.
+- [ ] Replace Pandas with something a bit faster.
+
 ## Usage & Installation
 First clone the repo and install the requirements using pip. This assumes you have Python and Pip installed on your machine. If not, please be sure to get both of them before continuing.
 
@@ -76,7 +82,7 @@ This project is provided "as is", without warranty of any kind, express or impli
 
 In non legal speak, be sensible with this util. Please don't spam or overload their site with requests. I am not responsible for anything you do with this that is unethical. 
 
-If the authors over at Electoral Calculus have any concerns about the use or distribution of this software, please contact the project owner Luke Skinner at hyperconix@pm.me.
+If the authors over at Electoral Calculus have any concerns about the use or distribution of this software, please contact the project owner Luke Skinner at ljs.work@pm.me.
 
 ## License
 
