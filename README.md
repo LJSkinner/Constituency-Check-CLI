@@ -8,7 +8,7 @@ Note: They do have an upper limit for the number of calls you can make to their 
 
 ## Update Todo
 Current plans for a v1.2 release of Constituency Checker:
-- [ ] Due to the upcoming election and boundary changes the current version of Constituency Checker reports old seat information. This needs to be amended so that is uses the new API.
+- [ ] Make seat search the default and allow the user to view more than one in a session.
 - [ ] Searching by MP name would be useful. Considerations need to be made about how to get these names, as MPs change more often than seat names.
 - [ ] Replace Pandas with something a bit faster.
 
