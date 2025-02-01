@@ -44,20 +44,39 @@ def main():
 def handle_name_search():
     seat_list_soup = get_seat_list_soup()
     
-    seat_list_anchors = seat_list_soup.find("table", attrs={"class":"small ccllccrrrrrrrrcc"}).find_all("a")
+    seat_list_table = seat_list_soup.find("table", attrs={"class":"small ccllccrrrrrrrrcc"})
     
-    if seat_list_anchors == None:
+    seat_list_anchors = seat_list_table.find_all("a")
+    
+    # This section for getting the mp names is a bit messy due to the way the table is. (there's a definitely a better way to do this)
+    
+    # We start by getting rid of the headings that are stored in td 
+    seat_list_rows = seat_list_table.find_all("td")[6:]
+    
+    mp_names = []
+    
+    # We insert the first name which is at index 3
+    mp_names.insert(0, seat_list_rows[3].text)
+    
+    # We start at index 19 and then increment by 16, since that is the amount of spaces to get each name in that column
+    for i in range(19, len(seat_list_rows), 16):
+        mp_names.append(seat_list_rows[i].text)
+    
+    if seat_list_anchors == None or len(mp_names) == 0:
         print("The seat list could not be retrieved, please try again later")
         
         return
     
+    if len(seat_list_anchors) != len(mp_names):
+        print("Something has went wrong. The length of seats and mp names do not match")
+    
     seat_list = []
     
-    for seat_list_anchor in seat_list_anchors:
-        seat_list.append(seat_list_anchor.text)
+    for i, seat_list_anchor in enumerate(seat_list_anchors):
+        seat_list.append(f"{seat_list_anchor.text} ({mp_names[i]})")
           
     while True:    
-      seat_name = input("Enter the seat name (Type exit to quit): ").lower().strip()
+      seat_name = input("Enter the seat or MP name (Type exit to quit): ").lower().strip()
     
       seat_name = seat_name.lower().strip()
       
@@ -90,7 +109,7 @@ def handle_name_search():
       if user_seat_choice < 0 or user_seat_choice > len(filtered_seat_list):
           clear_console()
           
-          print("Please make sure the number you entered is one of the seats or 0 to go back.")
+          print("Please make sure the number you entered is one of the options or 0 to go back.")
           
           continue
       elif user_seat_choice == 0:
@@ -98,8 +117,8 @@ def handle_name_search():
           
           continue
       else:
-          # Add %20 to account for spaces in the seat name
-          selected_seat = str.replace(filtered_seat_list[user_seat_choice - 1], " ", "%20")
+          # Add %20 to account for spaces in the seat name. Also we only want the seat name for this, so drop MP name.
+          selected_seat = str.replace(filtered_seat_list[user_seat_choice - 1], " ", "%20").split("%20(")[0]
           
           soup = get_seat_soup_from_name(selected_seat)
           
