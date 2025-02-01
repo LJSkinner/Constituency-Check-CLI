@@ -5,9 +5,7 @@ import re
 import pandas as pd 
 import os
 
-POSTCODE_USAGE = "Postcode Usage: python3 constituency_check.py <postcode>"
-
-NAME_USAGE = "Seat Name Usage: python3 constituency_check.py -n <name> (If the seat contains spaces wrap it in quotes like \"this\")"
+POSTCODE_USAGE = "Postcode Usage: python3 constituency_checker.py <postcode>"
 
 POSTCODE_REGEX = "^[A-Z]{1,2}[0-9][A-Z0-9]?[0-9][A-Z]{2}$"
 
@@ -36,8 +34,8 @@ def main():
         handle_name_search(); 
         
         return
-    elif re.match(POSTCODE_REGEX, sys.argv[1]) == None and sys.argv[1] != "-n":
-        print("You did not provide a valid UK Postcode. Example: FK20JA (do not include a space)\n%s" % POSTCODE_USAGE)
+    elif re.match(POSTCODE_REGEX, sys.argv[1]) == None:
+        print("You did not provide a valid UK Postcode. Example: FK94LA (do not include a space)\n%s" % POSTCODE_USAGE)
         
         return
     else:
