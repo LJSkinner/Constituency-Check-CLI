@@ -8,7 +8,7 @@ Note: They do have an upper limit for the number of calls you can make to their 
 
 ## Update Todo
 Current plans for a v1.2 release of Constituency Checker:
-- [ ] Make seat search the default and allow the user to view more than one in a session.
+- [x] Make seat search the default and allow the user to view more than one in a session.
 - [ ] Searching by MP name would be useful. Considerations need to be made about how to get these names, as MPs change more often than seat names.
 - [ ] Replace Pandas with something a bit faster.
 

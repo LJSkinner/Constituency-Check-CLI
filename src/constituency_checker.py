@@ -20,7 +20,9 @@ SEAT_NAME_URL = "https://www.electoralcalculus.co.uk/fcgi-bin/seatdetails.py?sea
 # The seat list URL is used when searching via seat name input, this retrieves the list of all current seats
 SEAT_LIST_URL = "https://www.electoralcalculus.co.uk/orderedseats.html"
 
-DEFAULT_NUM_ARGS = 3
+DEFAULT_NUM_ARGS = 2
+
+MIN_SEATS_TO_DISPLAY = 10
 
 def main():
     if len(sys.argv) > DEFAULT_NUM_ARGS:
@@ -28,31 +30,20 @@ def main():
         
         print(POSTCODE_USAGE)
         
-        print(NAME_USAGE)
-        
         return
     
     if len(sys.argv) < 2:
-        print("Postcode not provided. Please provide a postcode\n%s" % POSTCODE_USAGE)
+        handle_name_search(); 
         
         return
     elif re.match(POSTCODE_REGEX, sys.argv[1]) == None and sys.argv[1] != "-n":
         print("You did not provide a valid UK Postcode. Example: FK20JA (do not include a space)\n%s" % POSTCODE_USAGE)
         
         return
-    elif sys.argv[1] == "-n" and len(sys.argv) < 3:
-        print("You did not provide a valid input for the seat name. Example: Falkirk\n%s" % NAME_USAGE)
-        
-        return
-   
-    if sys.argv[1] == "-n":
-        handle_name_search(sys.argv[2])
     else:
         handle_postcode_search(sys.argv[1])
        
-def handle_name_search(seat_name: str):
-    seat_name = seat_name.lower().strip()
-    
+def handle_name_search():
     seat_list_soup = get_seat_list_soup()
     
     seat_list_anchors = seat_list_soup.find("table", attrs={"class":"small ccllccrrrrrrrrcc"}).find_all("a")
@@ -67,13 +58,17 @@ def handle_name_search(seat_name: str):
     for seat_list_anchor in seat_list_anchors:
         seat_list.append(seat_list_anchor.text)
           
-    while True:
+    while True:    
+      seat_name = input("Enter the seat name (Type exit to quit): ").lower().strip()
+    
+      seat_name = seat_name.lower().strip()
+      
       if seat_name == "exit":
           print("Thanks for using Constituency Checker, goodbye")
           
           break
-      
-      filtered_seat_list = [name for name in seat_list if seat_name in str.lower(name)]
+    
+      filtered_seat_list = [name for name in seat_list if seat_name in str.lower(name)][0:MIN_SEATS_TO_DISPLAY]
       
       for i, filtered_seat in enumerate(filtered_seat_list):
           print(i + 1, ":", filtered_seat)
@@ -82,8 +77,6 @@ def handle_name_search(seat_name: str):
           clear_console()
           
           print("No results found, try again")
-          
-          seat_name = input("Enter the seat name (Type exit to quit): ").lower().strip()
           
           continue
       
@@ -105,8 +98,6 @@ def handle_name_search(seat_name: str):
       elif user_seat_choice == 0:
           clear_console()
           
-          seat_name = input("Enter the seat name (Type exit to quit): ").lower().strip()
-          
           continue
       else:
           # Add %20 to account for spaces in the seat name
@@ -116,7 +107,13 @@ def handle_name_search(seat_name: str):
           
           process_seat_details(soup)
           
-      return
+          user_continue_choice = input("All done? Type exit if you would like to exit, otherwise press enter to continue: ")
+          
+          if str.lower(user_continue_choice) == "exit":
+              print("Thanks for using Constituency Checker, goodbye")
+              
+              return
+          
           
 def handle_postcode_search(postcode: str):
     soup = get_seat_soup_from_postcode(postcode)
