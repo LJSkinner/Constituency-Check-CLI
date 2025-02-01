@@ -6,11 +6,6 @@ The data used in this project is provided by the [Electoral Calculus website](ht
 
 **DISCLAIMER**: They do have an upper limit for the number of calls you can make to their service per day, so you may encounter an error if you're making a lot of calls in a day. Additionally, due to the nature of web scraping, this could break at any point should their website change. I also may private this repo at any time at the request of the authors.
 
-## Update Todo
-Current plans for a v1.2 release of Constituency Electoral Results Checker:
-- [x] Make seat search the default and allow the user to view more than one in a session.
-- [ ] Searching by MP name would be useful. Considerations need to be made about how to get these names, as MPs change more often than seat names.
-
 ## Usage & Installation
 First clone the repo and install the requirements using pip. This assumes you have Python and Pip installed on your machine. If not, please be sure to get both of them before continuing.
 
@@ -22,21 +17,22 @@ cd Constituency-Electoral-Results-Checker-CLI/
 pip3 install -r requirements.txt
 ```
 
-##### Searching by Seat Name
-When you run the program by default with no additional arguments you will start the search by name mode. The menu will allow you to search for constituencies by their seat name. 
+##### Searching by Seat or MP Name
+When you run the program by default with no additional arguments you will start the search by name mode. The menu will allow you to search for constituencies by their seat name or MPs name. 
 
 An example of running this is as follows:
 ```bash
 python3 constituency_checker.py 
 ```
 
-This will first ask us to search for a seat and then return a partial list of all the seats that contain the search term. So in this case we supplied **York** so we will get the two seats that contain **York** in them as shown below:
+This will first ask us to search for a seat or MP name and then return a partial list of all the seats that contain the search term. So in this case we supplied **York** so we will get the two seats that contain **York** in them as shown below:
 ```
-Enter the seat name (Type exit to quit): York
-1 : York Central
-2 : York Outer
-Please enter your choice using one of the numbers above (0 to go back):
+Enter the seat or MP name (Type exit to quit): York
+1 : York Central (Rachael Maskell)
+2 : York Outer (Luke Charters)
+Please enter your choice using one of the numbers above (0 to go back): 
 ```
+If we provided Rachael instead the first result would show up since it matches the name of the MP for that seat.
 
 We can then select on of the seat options by using the numbers so let's go with **2** for **York Outer**. This will then display the constituency results as shown below:
 ```
