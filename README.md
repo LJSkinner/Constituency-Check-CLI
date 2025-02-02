@@ -94,6 +94,11 @@ You did not provide a valid UK Postcode. Example: FK94LA (do not include a space
 Postcode Usage: python3 constituency_checker.py <postcode>
 ```
 
+## Contributing
+I do not have any specific template for contributing to this repo. Basically just use common sense when making a PR. Make your PR informative, test it out thoroughly before you submit etc. I use conventional commits myself, so I'd recommend having a look at their website [here](https://www.conventionalcommits.org/en/v1.0.0/). This is not a requirement for acceptance but it would keep the style consistent so if you're able to follow it then please do.
+
+I encourage and would be quite happy with any additions or improvements to this project.
+
 ## Legal
 
 This project is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
@@ -102,10 +107,7 @@ In non legal speak, be sensible with this util. Please don't spam or overload th
 
 If the authors over at Electoral Calculus have any concerns about the use or distribution of this software, please contact the project owner Luke Skinner at ljs.work@pm.me.
 
-## Contributing
-I do not have any specific template for contributing to this repo. Basically just use common sense when making a PR. Make your PR informative, test it out thoroughly before you submit etc.
 
-I encourage and would be quite happy with any additions or improvements to this project.
 
 ## License
 
