@@ -102,6 +102,11 @@ In non legal speak, be sensible with this util. Please don't spam or overload th
 
 If the authors over at Electoral Calculus have any concerns about the use or distribution of this software, please contact the project owner Luke Skinner at ljs.work@pm.me.
 
+## Contributing
+I do not have any specific template for contributing to this repo. Basically just use common sense when making a PR. Make your PR informative, test it out thoroughly before you submit etc.
+
+I encourage and would be quite happy with any additions or improvements to this project.
+
 ## License
 
 This project is licensed under the terms of the MIT license. See the [LICENSE.md](LICENSE.md) file for details.
