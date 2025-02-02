@@ -16,6 +16,7 @@ git clone https://github.com/LJSkinner/Constituency-Electoral-Results-Checker-CL
 cd Constituency-Electoral-Results-Checker-CLI/
 pip3 install -r requirements.txt
 ```
+After you have installed the requirements you can freely move this wherever you want. The easiest way to update would be to just run git clone or simply replace constituency_checker.py.
 
 ##### Searching by Seat or MP Name
 When you run the program by default with no additional arguments you will start the search by name mode. The menu will allow you to search for constituencies by their seat name or MPs name. 
